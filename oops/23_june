@@ -1,0 +1,37 @@
+import os.path
+import pickle
+
+print(f"Highest Protocol: {pickle.HIGHEST_PROTOCOL}")
+data={"name": "MyName","age": 25}
+
+with open("data.pkl","wb") as f:
+  pickle.dump(data,f)
+
+with open("data.pkl","rb") as f:
+    loaded_data=pickle.load(f)
+    
+    print(loaded_data)
+    
+    def expensive_function():
+        return [x**2 for x in range(10**6)]
+    cache_pkl="cache.pkl"
+    if os.path.exists(cache_pkl):
+        with open("cache.pkl","rb") as f:
+            result=pickle.load(f)
+            print(result.__len__(),"items are cached")
+            print("loaded from cache")
+            
+    else:
+        result=expensive_function()
+        print("computed result")
+        
+        with open("cache.pkl","wb") as f:
+            pickle.dump(result,f)
+            print(f"{result.__len__()} items are saved to cache")  
+            print("first 10 results ",result[:10])      
+            
+            
+            
+            
+         
+            
